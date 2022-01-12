@@ -7,18 +7,17 @@ $routes = Services::routes();
 
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
-if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
-{
-	require SYSTEMPATH . 'Config/Routes.php';
+if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
+    require SYSTEMPATH . 'Config/Routes.php';
 }
 
-/**
+/*
  * --------------------------------------------------------------------
  * Router Setup
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Todos');
+$routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -32,24 +31,7 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-
-/* ***********************************
-*** Rest routes
-**
-***************/
-
-
-$routes->resource('resttodos');
-
-// the prev line is Equivalent to the following:
-// $routes->get('/resttodos/new',             'resttodos::new');
-// $routes->post('/resttodos',                'resttodos::create');
-// $routes->get('/resttodos',                 'resttodos::index');
-// $routes->get('/resttodos/(:segment)',      'resttodos::show/$1');
-// $routes->get('/resttodos/(:segment)/edit', 'resttodos::edit/$1');
-// $routes->put('/resttodos/(:segment)',      'resttodos::update/$1');
-// $routes->patch('/resttodos/(:segment)',    'resttodos::update/$1');
-// $routes->delete('/resttodos/(:segment)',   'resttodos::delete/$1');
+$routes->get('/', 'Home::index');
 
 /*
  * --------------------------------------------------------------------
@@ -64,7 +46,6 @@ $routes->resource('resttodos');
  * You will have access to the $routes object within that file without
  * needing to reload it.
  */
-if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
-{
-	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
+    require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
